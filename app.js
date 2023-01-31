@@ -20,35 +20,6 @@ pauseButton.addEventListener("click", pauseRecording);
 
 function startRecording() { console.log("recordButton clicked"); }
 
-function pauseRecording() {
-    console.log("pauseButton clicked rec.recording=", rec.recording);
-    if (rec.recording) {
-        //pause 
-        rec.stop();
-        pauseButton.innerHTML = "Resume";
-    } else {
-        //resume 
-        rec.record()
-        pauseButton.innerHTML = "Pause";
-    }
-}
-
-
-function stopRecording() {
-    console.log("stopButton clicked");
-    //disable the stop button, enable the record too allow for new recordings 
-    stopButton.disabled = true;
-    recordButton.disabled = false;
-    pauseButton.disabled = true;
-    //reset button just in case the recording is stopped while paused 
-    pauseButton.innerHTML = "Pause";
-    //tell the recorder to stop the recording 
-    rec.stop(); //stop microphone access 
-    gumStream.getAudioTracks()[0].stop();
-    //create the wav blob and pass it on to createDownloadLink 
-    rec.exportWAV(createDownloadLink);
-}
-
 
 /* Simple constraints object, for more advanced audio features see
 
@@ -56,7 +27,6 @@ https://addpipe.com/blog/audio-constraints-getusermedia/ */
 
 var constraints = {
     audio: true,
-    video: false
 } 
 /* Disable the record button until we get a success or fail from getUserMedia() */
 
@@ -88,6 +58,34 @@ navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     pauseButton.disabled = true
 });
 
+function pauseRecording() {
+    console.log("pauseButton clicked rec.recording=", rec.recording);
+    if (rec.recording) {
+        //pause 
+        rec.stop();
+        pauseButton.innerHTML = "Resume";
+    } else {
+        //resume 
+        rec.record()
+        pauseButton.innerHTML = "Pause";
+    }
+}
+
+function stopRecording() {
+    console.log("stopButton clicked");
+    //disable the stop button, enable the record too allow for new recordings 
+    stopButton.disabled = true;
+    recordButton.disabled = false;
+    pauseButton.disabled = true;
+    //reset button just in case the recording is stopped while paused 
+    pauseButton.innerHTML = "Pause";
+    //tell the recorder to stop the recording 
+    rec.stop(); //stop microphone access 
+    gumStream.getAudioTracks()[0].stop();
+    //create the wav blob and pass it on to createDownloadLink 
+    rec.exportWAV(createDownloadLink);
+}
+
 function createDownloadLink(blob) {
     var url = URL.createObjectURL(blob);
     var au = document.createElement('audio');
@@ -104,27 +102,6 @@ function createDownloadLink(blob) {
     li.appendChild(au);
     li.appendChild(link);
     //add the li element to the ordered list 
-    recordingsList.appendChild(li);
     console.log(li);
-
-    var filename = new Date().toISOString();
-//filename to send to server without extension 
-//upload link 
-var upload = document.createElement('a');
-upload.href = "#";
-upload.innerHTML = "Upload";
-upload.addEventListener("click", function(event) {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function(e) {
-        if (this.readyState === 4) {
-            console.log("Server returned: ", e.target.responseText);
-        }
-    };
-    var fd = new FormData();
-    fd.append("audio_data", blob, filename);
-    xhr.open("POST", "upload.php", true);
-    xhr.send(fd);
-})
-li.appendChild(document.createTextNode(" ")) //add a space in between 
-li.appendChild(upload) //add the upload link to li
+    recordingsList.appendChild(li);
 }

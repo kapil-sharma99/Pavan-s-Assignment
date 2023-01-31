@@ -142,8 +142,8 @@
     transform: rotateY(-90deg);
   }
 
-  /* .redirectLabel {
-    position: absolute;
+  .redirectLabel {
+    position: relative;
     bottom: 20px;
     font-size: 15px;
     color: #720058;
@@ -169,4 +169,4 @@
     position: absolute;
     top: 294px;
     left: 84px;
-  } */
+  }

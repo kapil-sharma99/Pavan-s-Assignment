@@ -1,28 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Loop login</title>
-</head>
-<body>
-  <input type="radio" id="chk1" name="a1" style="display: none;">
-  <input type="radio" id="chk2" name="a1" style="display: none;">
-  <div class="box">
-    <div class="a">
-      Starting page
-      <label id="recordButton" class="redirectLabel">Enter Audio</label>
-      <label id="stopButton" class="redirectLabel">Add Audio</label>
-      <label id="pauseButton" class="redirectLabel">Enter Application</label>
-    </div>
-    <h3>Recordings</h3>
-    <ol id="recordingsList"></ol>
-  </div>
-</body>
-
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,14 +13,14 @@
   <input type="radio" id="chk2" name="a1" style="display: none;">
   <div class="box">
     <div class="a">
-      <!-- Starting page -->
+      
       <label for="chk1">Enter Audio</label>
       <label for="chk1" id="sup">Add Audio</label>
       <label for="chk2" id="sup">Applications</label>
     </div>
     <div class="b">
       <form action="" class="frm">
-        <!-- Sign up form -->
+      
         <h4 class="title">Applications</h4>
         <input class="btn" type="button" value="Whatsapp" id="btn" onclick=myAlert()>
         <input class="btn" type="button" value="Instagram" id="btn" onclick=myAlert()>
@@ -63,11 +38,11 @@
     <div class="c">
       <br><br><br><br><br>
       <form action="" class="frm">
-        <!-- Login form -->
+        
         <h4 class="title">Enter Audio</h4>
-        <input class="btn" type="button" value="Start" id="btn">
-        <input class="btn" type="button" value="Pause" id="btn">
-        <input class="btn" type="button" value="Stop" id="btn">
+        <input class="btn" type="button" value="Start" id="recordButton">
+        <input class="btn" type="button" value="Pause" id="pauseButton">
+        <input class="btn" type="button" value="Stop" id="stopButton">
         <label for="chk" id="btm">HOME</label>
       </form>
     </div>
